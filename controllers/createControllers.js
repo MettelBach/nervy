@@ -1,7 +1,5 @@
 const Book = require('../models/book')
 
-
-
 exports.getCreate = (req, res) => {
     res.render('create', {
         title: 'Add Books',

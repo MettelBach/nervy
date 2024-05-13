@@ -1,6 +1,5 @@
 const Book = require('../models/book')
 
-
 exports.getBooks = async (req, res) => {
     try {
         const books = await Book.find().lean();  
@@ -15,5 +14,3 @@ exports.getBooks = async (req, res) => {
         res.status(500).send('Error');
     }
 };
-
-

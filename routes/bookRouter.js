@@ -8,36 +8,12 @@ const Book = require('../models/book');
 
 bookRouter.get('/', bookControllers.getBooks);
 bookRouter.get('/create', createControllers.getCreate);
-bookRouter.get('/change', changeControllers.getChange);
 bookRouter.post('/create', createControllers.postCreate);
-bookRouter.post('/delete/:id', changeControllers.deleteBook);
+bookRouter.delete('/delete/:id', changeControllers.deleteBook);
 
-bookRouter.get('/change/:id', async (req, res) => {
-    try {
-        const book = await Book.findById(req.params.id);
-        if (!book) {
-            return res.status(404).send('Book not found');
-        }
-        res.render('change', { book }); 
-    } catch (error) {
-        console.error('Error accessing the database:', error);
-        res.status(500).send('Server error');
-    }
-});
-
-
-
-bookRouter.put('/change/:id', async (req, res) => {
-    const { id } = req.params;
-    const { title, author, genre, year, notes } = req.body;
-    try {
-        await Book.findByIdAndUpdate(id, { title, author, genre, year, notes });
-        res.redirect('/');  
-    } catch (error) {
-        console.error('Failed to update the book:', error);
-        res.status(500).send('Failed to update the book.');
-    }
-});
+bookRouter.get('/change', changeControllers.getChange);
+bookRouter.get('/change/:id', changeControllers.gettChange);
+bookRouter.put('/change/:id', changeControllers.putChange);
 
 
 module.exports = bookRouter;

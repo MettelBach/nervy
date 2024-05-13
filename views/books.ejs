@@ -16,38 +16,13 @@
                     <a href="/change/<%= book.id %>" class="btn-change">
                         <i class="fas fa-change"></i> Edit
                     </a>
+                    <form action="/delete/<%= book._id %>?_method=DELETE" method="post">
                     <button class="btn-delete" data-id="<%= book.id %>">
-
                         <i class="fas fa-trash-alt" data-id="<%= book.id %>"></i> Delete
                     </button>
+                </form>
                 </li>
             <% }) %>
         </ul>
-        <script>
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('btn-delete') || e.target.closest('.btn-delete')) {
-                    const id = e.target.dataset.id || e.target.closest('.btn-delete').dataset.id;
-                    if (id) {
-                        fetch(`/delete-book/${id}`, {
-                            method: 'DELETE',
-                        }).then(() => {
-                            window.location.reload();
-                        });
-                    }
-                }
-            });
-        </script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
