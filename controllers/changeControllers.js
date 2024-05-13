@@ -4,22 +4,19 @@ const Book = require('../models/book')
 exports.getChange = async (req, res) => {
     
     try {
-        const books = await Book.findOne({ _id: req.params.id });  // Получаем все книги
-        console.log(books);  // Выводим книги в консоль для проверки
+        const books = await Book.findOne({ _id: req.params.id });  
+        console.log(books);  
         res.render('change', {
             title: 'Change Books',
-            books: books  // Передаем книги в шаблон
+            books: books 
         });
     } catch (err) {
-        console.error(err);  // Выводим ошибки в консоль
-        res.status(500).send('Error retrieving books');  // Отправляем сообщение об ошибке
+        console.error(err);  
+        res.status(500).send('Error retrieving books'); 
     }
 };
 
-// Контроллер для обновления книги
 
-
-// Контроллер для удаления книги
 exports.deleteBook = async (req, res) => {
     
     try {
