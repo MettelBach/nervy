@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <h1>List of books</h1>
+        <ul class="books-list">
+            <% books.forEach(function(book) { %>
+                <li class="book-item">
+                    <div class="info">
+                        <span>Title: <%= book.title %></span>
+                        <span>Author: <%= book.author %></span>
+                        <span>Genre: <%= book.genre %></span>
+                        <span>Year: <%= book.year %></span>
+                    </div>
+                    <a href="/change/<%= book.id %>" class="btn-change">
+                        <i class="fas fa-change"></i> Edit
+                    </a>
+                    <button class="btn-delete" data-id="<%= book.id %>">
+
+                        <i class="fas fa-trash-alt" data-id="<%= book.id %>"></i> Delete
+                    </button>
+                </li>
+            <% }) %>
+        </ul>
+        <script>
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('btn-delete') || e.target.closest('.btn-delete')) {
+                    const id = e.target.dataset.id || e.target.closest('.btn-delete').dataset.id;
+                    if (id) {
+                        fetch(`/delete-book/${id}`, {
+                            method: 'DELETE',
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
