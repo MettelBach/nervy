@@ -18,7 +18,7 @@ bookRouter.get('/change/:id', async (req, res) => {
         if (!book) {
             return res.status(404).send('Book not found');
         }
-        res.render('change', { book }); // Указывается имя файла шаблона для рендеринга
+        res.render('change', { book }); 
     } catch (error) {
         console.error('Error accessing the database:', error);
         res.status(500).send('Server error');
@@ -32,7 +32,7 @@ bookRouter.put('/change/:id', async (req, res) => {
     const { title, author, genre, year, notes } = req.body;
     try {
         await Book.findByIdAndUpdate(id, { title, author, genre, year, notes });
-        res.redirect('/');  // Возврат на главную страницу после обновления
+        res.redirect('/');  
     } catch (error) {
         console.error('Failed to update the book:', error);
         res.status(500).send('Failed to update the book.');
