@@ -39,13 +39,12 @@ start()
 
 
 
-// Обновление книги
 app.post('/change/:id', async (req, res) => {
     const { id } = req.params;
     const { title, author, genre, year, notes } = req.body;
     try {
         await Book.findByIdAndUpdate(id, { title, author, genre, year, notes });
-        res.redirect('/'); // Возврат на главную страницу или страницу со списком книг
+        res.redirect('/'); 
     } catch (error) {
         console.error('Failed to update the book:', error);
         res.status(500).send('Failed to update the book.');
